@@ -1,0 +1,28 @@
+<h1>Show Contributor</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @contributor.name %>
+  </li>
+
+  <li>
+    <strong>Total:</strong>
+    <%= @contributor.total %>
+  </li>
+
+  <li>
+    <strong>Pac contributions:</strong>
+    <%= @contributor.pac_contributions %>
+  </li>
+
+  <li>
+    <strong>Individual contributions:</strong>
+    <%= @contributor.individual_contributions %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.contributor_path(@conn, :edit, @contributor) %></span> |
+<span><%= link "Back", to: Routes.contributor_path(@conn, :index) %></span>
