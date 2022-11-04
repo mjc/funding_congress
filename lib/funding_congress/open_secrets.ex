@@ -197,4 +197,100 @@ defmodule FundingCongress.OpenSecrets do
   def change_representative(%Representative{} = representative, attrs \\ %{}) do
     Representative.changeset(representative, attrs)
   end
+
+  alias FundingCongress.OpenSecrets.RepresentativeContribution
+
+  @doc """
+  Returns the list of representatives_contributors.
+
+  ## Examples
+
+      iex> list_representatives_contributors()
+      [%RepresentativeContribution{}, ...]
+
+  """
+  def list_representatives_contributors do
+    Repo.all(RepresentativeContribution)
+  end
+
+  @doc """
+  Gets a single representative_contribution.
+
+  Raises `Ecto.NoResultsError` if the Representative contribution does not exist.
+
+  ## Examples
+
+      iex> get_representative_contribution!(123)
+      %RepresentativeContribution{}
+
+      iex> get_representative_contribution!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_representative_contribution!(id), do: Repo.get!(RepresentativeContribution, id)
+
+  @doc """
+  Creates a representative_contribution.
+
+  ## Examples
+
+      iex> create_representative_contribution(%{field: value})
+      {:ok, %RepresentativeContribution{}}
+
+      iex> create_representative_contribution(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_representative_contribution(attrs \\ %{}) do
+    %RepresentativeContribution{}
+    |> RepresentativeContribution.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a representative_contribution.
+
+  ## Examples
+
+      iex> update_representative_contribution(representative_contribution, %{field: new_value})
+      {:ok, %RepresentativeContribution{}}
+
+      iex> update_representative_contribution(representative_contribution, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_representative_contribution(%RepresentativeContribution{} = representative_contribution, attrs) do
+    representative_contribution
+    |> RepresentativeContribution.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a representative_contribution.
+
+  ## Examples
+
+      iex> delete_representative_contribution(representative_contribution)
+      {:ok, %RepresentativeContribution{}}
+
+      iex> delete_representative_contribution(representative_contribution)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_representative_contribution(%RepresentativeContribution{} = representative_contribution) do
+    Repo.delete(representative_contribution)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking representative_contribution changes.
+
+  ## Examples
+
+      iex> change_representative_contribution(representative_contribution)
+      %Ecto.Changeset{data: %RepresentativeContribution{}}
+
+  """
+  def change_representative_contribution(%RepresentativeContribution{} = representative_contribution, attrs \\ %{}) do
+    RepresentativeContribution.changeset(representative_contribution, attrs)
+  end
 end

@@ -1,0 +1,32 @@
+<h1>Listing Representatives contributors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cycle</th>
+      <th>Origin</th>
+      <th>Notice</th>
+      <th>Source</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for representative_contribution <- @representatives_contributors do %>
+    <tr>
+      <td><%= representative_contribution.cycle %></td>
+      <td><%= representative_contribution.origin %></td>
+      <td><%= representative_contribution.notice %></td>
+      <td><%= representative_contribution.source %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.representative_contribution_path(@conn, :show, representative_contribution) %></span>
+        <span><%= link "Edit", to: Routes.representative_contribution_path(@conn, :edit, representative_contribution) %></span>
+        <span><%= link "Delete", to: Routes.representative_contribution_path(@conn, :delete, representative_contribution), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Representative contribution", to: Routes.representative_contribution_path(@conn, :new) %></span>

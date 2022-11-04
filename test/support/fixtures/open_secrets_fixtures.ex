@@ -51,4 +51,21 @@ defmodule FundingCongress.OpenSecretsFixtures do
 
     representative
   end
+
+  @doc """
+  Generate a representative_contribution.
+  """
+  def representative_contribution_fixture(attrs \\ %{}) do
+    {:ok, representative_contribution} =
+      attrs
+      |> Enum.into(%{
+        cycle: ~D[2022-11-03],
+        notice: "some notice",
+        origin: "some origin",
+        source: "some source"
+      })
+      |> FundingCongress.OpenSecrets.create_representative_contribution()
+
+    representative_contribution
+  end
 end

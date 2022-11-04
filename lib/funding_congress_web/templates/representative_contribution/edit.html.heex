@@ -1,0 +1,5 @@
+<h1>Edit Representative contribution</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.representative_contribution_path(@conn, :update, @representative_contribution)) %>
+
+<span><%= link "Back", to: Routes.representative_contribution_path(@conn, :index) %></span>

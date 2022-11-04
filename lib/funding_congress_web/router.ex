@@ -19,6 +19,7 @@ defmodule FundingCongressWeb.Router do
 
     resources "/contributors", ContributorController
     resources "/representatives", RepresentativeController
+    resources "/representatives_contributors", RepresentativeContributionController
 
     get "/", PageController, :index
   end

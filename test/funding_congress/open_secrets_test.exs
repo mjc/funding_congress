@@ -140,4 +140,64 @@ defmodule FundingCongress.OpenSecretsTest do
       assert %Ecto.Changeset{} = OpenSecrets.change_representative(representative)
     end
   end
+
+  describe "representatives_contributors" do
+    alias FundingCongress.OpenSecrets.RepresentativeContribution
+
+    import FundingCongress.OpenSecretsFixtures
+
+    @invalid_attrs %{cycle: nil, notice: nil, origin: nil, source: nil}
+
+    test "list_representatives_contributors/0 returns all representatives_contributors" do
+      representative_contribution = representative_contribution_fixture()
+      assert OpenSecrets.list_representatives_contributors() == [representative_contribution]
+    end
+
+    test "get_representative_contribution!/1 returns the representative_contribution with given id" do
+      representative_contribution = representative_contribution_fixture()
+      assert OpenSecrets.get_representative_contribution!(representative_contribution.id) == representative_contribution
+    end
+
+    test "create_representative_contribution/1 with valid data creates a representative_contribution" do
+      valid_attrs = %{cycle: ~D[2022-11-03], notice: "some notice", origin: "some origin", source: "some source"}
+
+      assert {:ok, %RepresentativeContribution{} = representative_contribution} = OpenSecrets.create_representative_contribution(valid_attrs)
+      assert representative_contribution.cycle == ~D[2022-11-03]
+      assert representative_contribution.notice == "some notice"
+      assert representative_contribution.origin == "some origin"
+      assert representative_contribution.source == "some source"
+    end
+
+    test "create_representative_contribution/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = OpenSecrets.create_representative_contribution(@invalid_attrs)
+    end
+
+    test "update_representative_contribution/2 with valid data updates the representative_contribution" do
+      representative_contribution = representative_contribution_fixture()
+      update_attrs = %{cycle: ~D[2022-11-04], notice: "some updated notice", origin: "some updated origin", source: "some updated source"}
+
+      assert {:ok, %RepresentativeContribution{} = representative_contribution} = OpenSecrets.update_representative_contribution(representative_contribution, update_attrs)
+      assert representative_contribution.cycle == ~D[2022-11-04]
+      assert representative_contribution.notice == "some updated notice"
+      assert representative_contribution.origin == "some updated origin"
+      assert representative_contribution.source == "some updated source"
+    end
+
+    test "update_representative_contribution/2 with invalid data returns error changeset" do
+      representative_contribution = representative_contribution_fixture()
+      assert {:error, %Ecto.Changeset{}} = OpenSecrets.update_representative_contribution(representative_contribution, @invalid_attrs)
+      assert representative_contribution == OpenSecrets.get_representative_contribution!(representative_contribution.id)
+    end
+
+    test "delete_representative_contribution/1 deletes the representative_contribution" do
+      representative_contribution = representative_contribution_fixture()
+      assert {:ok, %RepresentativeContribution{}} = OpenSecrets.delete_representative_contribution(representative_contribution)
+      assert_raise Ecto.NoResultsError, fn -> OpenSecrets.get_representative_contribution!(representative_contribution.id) end
+    end
+
+    test "change_representative_contribution/1 returns a representative_contribution changeset" do
+      representative_contribution = representative_contribution_fixture()
+      assert %Ecto.Changeset{} = OpenSecrets.change_representative_contribution(representative_contribution)
+    end
+  end
 end

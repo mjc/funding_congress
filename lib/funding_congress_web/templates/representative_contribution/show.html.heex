@@ -1,0 +1,28 @@
+<h1>Show Representative contribution</h1>
+
+<ul>
+
+  <li>
+    <strong>Cycle:</strong>
+    <%= @representative_contribution.cycle %>
+  </li>
+
+  <li>
+    <strong>Origin:</strong>
+    <%= @representative_contribution.origin %>
+  </li>
+
+  <li>
+    <strong>Notice:</strong>
+    <%= @representative_contribution.notice %>
+  </li>
+
+  <li>
+    <strong>Source:</strong>
+    <%= @representative_contribution.source %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.representative_contribution_path(@conn, :edit, @representative_contribution) %></span> |
+<span><%= link "Back", to: Routes.representative_contribution_path(@conn, :index) %></span>
