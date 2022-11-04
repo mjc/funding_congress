@@ -1,0 +1,28 @@
+<h1>Show Representative</h1>
+
+<ul>
+
+  <li>
+    <strong>Cid:</strong>
+    <%= @representative.cid %>
+  </li>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @representative.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @representative.last_name %>
+  </li>
+
+  <li>
+    <strong>Party:</strong>
+    <%= @representative.party %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.representative_path(@conn, :edit, @representative) %></span> |
+<span><%= link "Back", to: Routes.representative_path(@conn, :index) %></span>

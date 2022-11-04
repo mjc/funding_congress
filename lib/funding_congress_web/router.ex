@@ -18,6 +18,7 @@ defmodule FundingCongressWeb.Router do
     pipe_through :browser
 
     resources "/contributors", ContributorController
+    resources "/representatives", RepresentativeController
 
     get "/", PageController, :index
   end

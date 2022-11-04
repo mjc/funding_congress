@@ -80,4 +80,64 @@ defmodule FundingCongress.OpenSecretsTest do
       assert %Ecto.Changeset{} = OpenSecrets.change_contributor(contributor)
     end
   end
+
+  describe "representatives" do
+    alias FundingCongress.OpenSecrets.Representative
+
+    import FundingCongress.OpenSecretsFixtures
+
+    @invalid_attrs %{cid: nil, first_name: nil, last_name: nil, party: nil}
+
+    test "list_representatives/0 returns all representatives" do
+      representative = representative_fixture()
+      assert OpenSecrets.list_representatives() == [representative]
+    end
+
+    test "get_representative!/1 returns the representative with given id" do
+      representative = representative_fixture()
+      assert OpenSecrets.get_representative!(representative.id) == representative
+    end
+
+    test "create_representative/1 with valid data creates a representative" do
+      valid_attrs = %{cid: "some cid", first_name: "some first_name", last_name: "some last_name", party: "some party"}
+
+      assert {:ok, %Representative{} = representative} = OpenSecrets.create_representative(valid_attrs)
+      assert representative.cid == "some cid"
+      assert representative.first_name == "some first_name"
+      assert representative.last_name == "some last_name"
+      assert representative.party == "some party"
+    end
+
+    test "create_representative/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = OpenSecrets.create_representative(@invalid_attrs)
+    end
+
+    test "update_representative/2 with valid data updates the representative" do
+      representative = representative_fixture()
+      update_attrs = %{cid: "some updated cid", first_name: "some updated first_name", last_name: "some updated last_name", party: "some updated party"}
+
+      assert {:ok, %Representative{} = representative} = OpenSecrets.update_representative(representative, update_attrs)
+      assert representative.cid == "some updated cid"
+      assert representative.first_name == "some updated first_name"
+      assert representative.last_name == "some updated last_name"
+      assert representative.party == "some updated party"
+    end
+
+    test "update_representative/2 with invalid data returns error changeset" do
+      representative = representative_fixture()
+      assert {:error, %Ecto.Changeset{}} = OpenSecrets.update_representative(representative, @invalid_attrs)
+      assert representative == OpenSecrets.get_representative!(representative.id)
+    end
+
+    test "delete_representative/1 deletes the representative" do
+      representative = representative_fixture()
+      assert {:ok, %Representative{}} = OpenSecrets.delete_representative(representative)
+      assert_raise Ecto.NoResultsError, fn -> OpenSecrets.get_representative!(representative.id) end
+    end
+
+    test "change_representative/1 returns a representative changeset" do
+      representative = representative_fixture()
+      assert %Ecto.Changeset{} = OpenSecrets.change_representative(representative)
+    end
+  end
 end

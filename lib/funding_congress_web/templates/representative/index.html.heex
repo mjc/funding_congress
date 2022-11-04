@@ -1,0 +1,32 @@
+<h1>Listing Representatives</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cid</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Party</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for representative <- @representatives do %>
+    <tr>
+      <td><%= representative.cid %></td>
+      <td><%= representative.first_name %></td>
+      <td><%= representative.last_name %></td>
+      <td><%= representative.party %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.representative_path(@conn, :show, representative) %></span>
+        <span><%= link "Edit", to: Routes.representative_path(@conn, :edit, representative) %></span>
+        <span><%= link "Delete", to: Routes.representative_path(@conn, :delete, representative), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Representative", to: Routes.representative_path(@conn, :new) %></span>

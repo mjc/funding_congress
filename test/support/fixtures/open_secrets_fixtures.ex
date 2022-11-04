@@ -34,4 +34,21 @@ defmodule FundingCongress.OpenSecretsFixtures do
 
     contributor
   end
+
+  @doc """
+  Generate a representative.
+  """
+  def representative_fixture(attrs \\ %{}) do
+    {:ok, representative} =
+      attrs
+      |> Enum.into(%{
+        cid: "some cid",
+        first_name: "some first_name",
+        last_name: "some last_name",
+        party: "some party"
+      })
+      |> FundingCongress.OpenSecrets.create_representative()
+
+    representative
+  end
 end

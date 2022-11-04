@@ -101,4 +101,100 @@ defmodule FundingCongress.OpenSecrets do
   def change_contributor(%Contributor{} = contributor, attrs \\ %{}) do
     Contributor.changeset(contributor, attrs)
   end
+
+  alias FundingCongress.OpenSecrets.Representative
+
+  @doc """
+  Returns the list of representatives.
+
+  ## Examples
+
+      iex> list_representatives()
+      [%Representative{}, ...]
+
+  """
+  def list_representatives do
+    Repo.all(Representative)
+  end
+
+  @doc """
+  Gets a single representative.
+
+  Raises `Ecto.NoResultsError` if the Representative does not exist.
+
+  ## Examples
+
+      iex> get_representative!(123)
+      %Representative{}
+
+      iex> get_representative!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_representative!(id), do: Repo.get!(Representative, id)
+
+  @doc """
+  Creates a representative.
+
+  ## Examples
+
+      iex> create_representative(%{field: value})
+      {:ok, %Representative{}}
+
+      iex> create_representative(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_representative(attrs \\ %{}) do
+    %Representative{}
+    |> Representative.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a representative.
+
+  ## Examples
+
+      iex> update_representative(representative, %{field: new_value})
+      {:ok, %Representative{}}
+
+      iex> update_representative(representative, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_representative(%Representative{} = representative, attrs) do
+    representative
+    |> Representative.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a representative.
+
+  ## Examples
+
+      iex> delete_representative(representative)
+      {:ok, %Representative{}}
+
+      iex> delete_representative(representative)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_representative(%Representative{} = representative) do
+    Repo.delete(representative)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking representative changes.
+
+  ## Examples
+
+      iex> change_representative(representative)
+      %Ecto.Changeset{data: %Representative{}}
+
+  """
+  def change_representative(%Representative{} = representative, attrs \\ %{}) do
+    Representative.changeset(representative, attrs)
+  end
 end
